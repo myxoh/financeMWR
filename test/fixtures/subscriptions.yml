@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ticket: MyString
+  last_checked: 2017-03-02 15:59:50
+  frequency: 1
+  range_min: 
+  range_max: 
+
+two:
+  ticket: MyString
+  last_checked: 2017-03-02 15:59:50
+  frequency: 1
+  range_min: 
+  range_max: 
