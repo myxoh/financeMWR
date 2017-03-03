@@ -1,11 +1,11 @@
 module Notifier
-  def notify           event
-    send_email settings(send_email)        if settings[:send_email]
-    send_notification settings(send_email) if settings[:send_notification]
+  def notify event
+    send_email        event if settings[:send_email]
+    send_notification event if settings[:send_notification]
   end
 
   private
-  def send_email       event
+  def send_email event
     #Not implemented
   end
 

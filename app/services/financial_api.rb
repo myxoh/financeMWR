@@ -30,7 +30,7 @@ class FinancialAPI
     rescue
       return [] #Returns an empty list if the HTTP connection failed.
     end
-     results.map{ |result| {symbol: result['Symbol'], name: result['Name'], exchange: result['Exchange']} }
+     results.map{ |result| Ticket.new({symbol: result['Symbol'], name: result['Name'], exchange: result['Exchange']}) }
   end
 
   def quote value
@@ -49,14 +49,14 @@ class FinancialAPI
       return false #Returns false if the HTTP connection failed.
     end 
     if !result.try(:[],'Status').nil? and result['Status'] == 'SUCCESS'
-      {symbol: result['Symbol'], price: result['LastPrice']} 
+      Ticket.new({symbol: result['Symbol'], price: result['LastPrice']}) 
     else
       false
     end
   end
 
   def multiple_single_quotes stocks #Quote all potential symbols (The default API only allows one quote at a time)
-    stocks.map! do |stock|
+    stocks = stocks.map do |stock|
       value = stock.try(:[],:symbol) || stock.to_s    #Allows for an array of symbols or an array of stocks with names included
       sleep @settings[:sleep_time]                     #Prevent multiple requests per second. For long lookups this might still fail on some requests    
       quote_result            = quote(value)
