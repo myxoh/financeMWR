@@ -9,6 +9,7 @@ class FinancialAPI
         lookup_key:     ENV['FINANICAL_API_LOOKUP_KEY']     || "input",
         quote:          ENV['FINANICAL_API_QUOTE']          || "Quote/json",
         quote_key:      ENV['FINANICAL_QUOTE_KEY']          || "symbol",
+        sleep_time:     ENV['FINANCIAL_SLEEP_TIME']         || 1
         #quote_market_key: nil #TODO: allow for future implementations to permit multiple market keys
       }.merge(settings)
       nil_params = settings.select{|data| data.blank?}
@@ -54,17 +55,22 @@ class FinancialAPI
     end
   end
 
-  def multiple_single_quotes values #Quote all potential symbols (The default API only allows one quote at a time)
-    values.map do |value|
-      sleep 1                     #Prevent multiple requests per second. For long lookups this might still fail on some requests    
-      value.quote
+  def multiple_single_quotes stocks #Quote all potential symbols (The default API only allows one quote at a time)
+    stocks.map! do |stock|
+      value = stock.try(:[],:symbol) || stock.to_s    #Allows for an array of symbols or an array of stocks with names included
+      sleep @settings[:sleep_time]                     #Prevent multiple requests per second. For long lookups this might still fail on some requests    
+      quote_result            = quote(value)
+      if quote_result
+        quote_result[:name]     = stock[:name]
+        quote_result[:exchange] = stock[:exchange]
+      end
+      quote_result #Return the full array including: Price, Symbol, Name and Exchange
     end
-    values.select{|value| value}  #Returns only quotes, and not "Falses" that are generated on failed requests.
-    byebug
+    stocks.select{|value| value}  #Returns only quotes, and not "Falses" that are generated on failed requests.
   end
 
   def quote_lookup value
-      multiple_single_quotes(lookup(value).map!{|stock| (stock[:symbol])})
+      multiple_single_quotes(lookup(value))
   end
 
 end
