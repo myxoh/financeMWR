@@ -61,8 +61,8 @@ class FinancialAPI
       sleep @settings[:sleep_time]                     #Prevent multiple requests per second. For long lookups this might still fail on some requests    
       quote_result            = quote(value)
       if quote_result
-        quote_result[:name]     = stock[:name]
-        quote_result[:exchange] = stock[:exchange]
+        quote_result[:name]     = stock[:name]     if stock[:name]
+        quote_result[:exchange] = stock[:exchange] if stock[:exchange]
       end
       quote_result #Return the full array including: Price, Symbol, Name and Exchange
     end

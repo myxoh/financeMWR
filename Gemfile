@@ -34,7 +34,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'whenever', required: false
+gem 'whenever', require: false
 gem 'rspec'
 gem 'httpclient'
 
