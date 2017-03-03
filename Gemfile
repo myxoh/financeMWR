@@ -34,8 +34,6 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
-gem 'rubocop', '~> 0.47.1', require: false
 gem 'whenever'
 gem 'rspec'
 gem 'httpclient'
