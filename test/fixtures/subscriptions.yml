@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  ticket: MyString
-  last_checked: 2017-03-02 15:59:50
+not_checked:
+  ticket: NOT
+  last_checked: 
   frequency: 1
   range_min: 
   range_max: 
 
-two:
-  ticket: MyString
+checked:
+  ticket: YES
   last_checked: 2017-03-02 15:59:50
   frequency: 1
   range_min: 

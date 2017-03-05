@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class SubscribeControllerTest < ActionDispatch::IntegrationTest
-  test "should get create" do
-    get subscribe_create_url
+  test "should respond" do
+    post subscribe_url(symbol: "FB", price: 0.15)
     assert_response :success
   end
 

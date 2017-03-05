@@ -2,10 +2,10 @@
 
 one:
   read: false
-  subscription: one
+  subscription: checked
   description: MyText
 
 two:
-  read: false
-  subscription: two
+  read: true
+  subscription: checked
   description: MyText

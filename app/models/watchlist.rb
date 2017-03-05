@@ -1,5 +1,5 @@
 class Watchlist < ApplicationRecord
-  validates :symbol, :uniqueness => true
+  validates :symbol, uniqueness:{case_sensitive: false}
   before_save :upper_symbol
   class <<self
     def quote_tickets api

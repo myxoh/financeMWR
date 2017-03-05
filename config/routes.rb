@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'finance/lookup/:value' => 'finance#lookup'
-
-  get 'finance/quote/:value' => 'finance#quote'
+  get 'finance/quote/:value' => 'finance#quote', as: :finance_quote
 
   get 'notifications'=>'notifications#index'
 
