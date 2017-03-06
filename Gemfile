@@ -37,6 +37,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'whenever', require: false
 gem 'httpclient'
 
+#Add some design:
+gem 'bootstrap'
+
 
 
 #The following are the required gems for the application logic:

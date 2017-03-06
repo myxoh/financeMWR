@@ -5,11 +5,13 @@ $(document).ready(function(){
 		loading();
 		$.getJSON('finance/quote/'+$("#symbol").val()
 			).done(function(data){
-				console.log(data);
+				$("#result_template").append("<div class='row'>");
 				if(data){
 					data.forEach(function(stock){
 						add_result(stock.symbol, stock.price, stock.exchange, stock.name);
 					});
+
+				$("#result_template").append("</div>");
 					$("#loading").hide();
 				}else{
 					no_results();
